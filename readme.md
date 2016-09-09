@@ -8,7 +8,6 @@ Play [audio buffer](https://github.com/audiojs/audio-buffer), browser/node-wise.
 
 ```js
 const play = require('audio-play');
-const load = require('audio-load');
 
 load('./sample.mp3').then(play);
 ```
@@ -16,6 +15,8 @@ load('./sample.mp3').then(play);
 ## API
 
 ```js
+const play = require('audio-play');
+
 //play audio buffer with possible options
 let pause = play(audioBuffer, {
 	//start/end time, can be negative to measure from the end
