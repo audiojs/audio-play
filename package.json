@@ -9,6 +9,7 @@
     "lint": "eslint *.js --ignore-pattern test*",
     "preversion": "npm run lint && npm run test"
   },
+  "browser": "./browser",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/audiojs/play.git"
@@ -26,6 +27,13 @@
   },
   "homepage": "https://github.com/audiojs/play#readme",
   "devDependencies": {
+    "audio-buffer": "^2.4.5",
+    "audio-lena": "^1.1.0",
     "eslint": "^3.4.0"
+  },
+  "dependencies": {
+    "audio-source": "^1.0.0",
+    "audio-speaker": "^1.4.0",
+    "is-audio-buffer": "^1.0.1"
   }
 }

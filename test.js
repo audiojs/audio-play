@@ -2,10 +2,21 @@
 
 const play = require('./');
 const lena = require('audio-lena/buffer');
+const AudioBuffer = require('audio-buffer');
 
-play(lena, {
-	start: .2,
-	end: .3,
-	repeat: 4,
-	rate: .9
+let buf = AudioBuffer(1, lena);
+
+let playback = play(buf, {
+	start: 1.2,
+	end: 3,
+	// loop: true,
+	rate: 1.1
+}, () => {
+	console.log('end');
 });
+
+setTimeout(() => {
+	let play = playback.pause();
+
+	setTimeout(playback.play, 400);
+}, 400);

@@ -18,14 +18,12 @@ load('./sample.mp3').then(play);
 ```js
 //play audio buffer with possible options
 let pause = play(audioBuffer, {
-	//repeat - bool or number for exact number of repeats
-	repeat: false,
-
-	//start time
+	//start/end time, can be negative to measure from the end
 	start: 0,
+	end: audioBuffer.duration,
 
-	//end time
-	end: -0,
+	//repeat playback within start/end
+	loop: false,
 
 	//playback rate
 	rate: 1,
@@ -33,13 +31,22 @@ let pause = play(audioBuffer, {
 	//fine-tune of playback rate, in cents
 	detune: 0,
 
+	//volume
+	volume: 1,
+
 	//possibly existing audio-context, not necessary
 	context: require('audio-context'),
-});
 
-//pause playback
+	//start playing immediately
+	autoplay: true
+}, onend?);
+
+//pause/continue playback
 play = pause();
-
-//continue playback
 pause = play();
+
+//or usual way
+let playback = play(buffer, opts?, cb?);
+playback.pause();
+playback.play();
 ```
