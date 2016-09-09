@@ -2,8 +2,8 @@
 
 'use strict';
 
-let context = require('audio-context');
-let isAudioBuffer = require('is-audio-buffer');
+const context = require('audio-context');
+const isAudioBuffer = require('is-audio-buffer');
 
 module.exports = function Play (buffer, how, cb) {
 	if (!isAudioBuffer(buffer)) throw Error('Argument should be an audio buffer');
@@ -25,7 +25,13 @@ module.exports = function Play (buffer, how, cb) {
 
 	let sourceNode = createNode(buffer, how);
 
-	sourceNode.connect(context.destination);
+	if (!how.gain) {
+		how.gain = how.context.createGain();
+		how.gain.gain.value = how.volume == null ? 1 : how.volume;
+		how.gain.connect(context.destination);
+	}
+	sourceNode.connect(how.gain);
+
 	sourceNode.addEventListener('ended', cb);
 
 	//provide API
@@ -88,13 +94,6 @@ function createNode (buffer, how) {
 		sourceNode.loop = true;
 		sourceNode.loopStart = how.start;
 		sourceNode.loopEnd = how.end;
-	}
-
-	if (how.volume != null) {
-		let gainNode = how.context.createGain();
-		sourceNode.connect(gainNode);
-		gainNode.gain.value = how.volume;
-		sourceNode = gainNode;
 	}
 
 	return sourceNode;
