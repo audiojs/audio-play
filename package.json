@@ -1,0 +1,31 @@
+{
+  "name": "audio-play",
+  "version": "1.0.0",
+  "description": "Play audio buffer in node or browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "test:browser": "budo test.js",
+    "lint": "eslint *.js --ignore-pattern test*",
+    "preversion": "npm run lint && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audiojs/play.git"
+  },
+  "keywords": [
+    "play",
+    "audio",
+    "web-audio-api",
+    "sound"
+  ],
+  "author": "ΔY <dfcreative@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/audiojs/play/issues"
+  },
+  "homepage": "https://github.com/audiojs/play#readme",
+  "devDependencies": {
+    "eslint": "^3.4.0"
+  }
+}
