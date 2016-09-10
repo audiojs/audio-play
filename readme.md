@@ -8,8 +8,10 @@ Play [audio buffer](https://github.com/audiojs/audio-buffer), browser/node-wise.
 
 ```js
 const play = require('audio-play');
+const load = require('audio-loader');
+const context = require('audio-context');
 
-load('./sample.mp3').then(play);
+load(context, './sample.mp3').then(play);
 ```
 
 ## API

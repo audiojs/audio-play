@@ -37,7 +37,7 @@ module.exports = function (buffer, how, cb) {
 		buffer = slicedBuffer;
 	}
 
-	//TODO: somewhere here goes rate mapping
+	//TODO: somewhere here goes rate mapping, volume and detune
 
 	let read = AudioSource(buffer, {
 		loop: how.loop

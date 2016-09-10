@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/audiojs/play#readme",
   "devDependencies": {
-    "audio-buffer": "^2.4.5",
     "audio-lena": "^1.1.0",
     "eslint": "^3.4.0"
   },
