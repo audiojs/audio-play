@@ -25,7 +25,7 @@ module.exports = function (buffer, how, cb) {
 
 
 	//prepare buffer - slice to duration
-	if (how.start != 0 && how.end != buffer.duration) {
+	if (how.start != 0 || how.end != buffer.duration) {
 		let start = Math.floor(how.start * buffer.sampleRate);
 		let end = Math.floor(how.end * buffer.sampleRate);
 		let slicedBuffer = new AudioBuffer(buffer.numberOfChannels, end - start, buffer.sampleRate);
