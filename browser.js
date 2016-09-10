@@ -86,7 +86,6 @@ function normTime (time, duration) {
 
 function createNode (buffer, how) {
 	let sourceNode = how.context.createBufferSource();
-	let destination = how.context.destination;
 
 	sourceNode.buffer = buffer;
 

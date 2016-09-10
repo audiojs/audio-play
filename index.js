@@ -60,13 +60,13 @@ module.exports = function (buffer, how, cb) {
 
 		isPlaying = true;
 
-		;(function loop (err, buf) {
+		(function loop (err, buf) {
 			if (err) return cb && cb(err);
 			if (!isPlaying) return;
 
 			buf = read(buf);
 			write(buf, loop);
-		})();
+		}());
 
 		return pause;
 	}
