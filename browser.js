@@ -38,15 +38,15 @@ module.exports = function Play (buffer, how, cb) {
 	play.play = pause.play = play;
 	play.pause = pause.pause = pause;
 
+	let startTime = 0;
+	let isPlaying = false;
+
 	return how.autoplay != false ? play() : play;
 
-	var startTime = 0;
-	var isStarted = true;
-
 	function play () {
-		if (isStarted) return;
+		if (isPlaying) return pause;
 
-		isStarted = true;
+		isPlaying = true;
 
 		startTime = how.context.currentTime;
 
@@ -61,6 +61,9 @@ module.exports = function Play (buffer, how, cb) {
 	}
 
 	function pause () {
+		if (!isPlaying) return pause.play;
+		isPlaying = false;
+
 		sourceNode.stop();
 		sourceNode.removeEventListener('ended', cb);
 
@@ -69,9 +72,11 @@ module.exports = function Play (buffer, how, cb) {
 		how.autoplay = false;
 		how.offset = playedTime;
 
-		pause.play = Play(buffer, how, cb);
+		let playback = Play(buffer, how, cb);
+		play.play = pause.play = playback.play;
+		play.pause = pause.pause = playback.pause;
 
-		return pause.play;
+		return playback;
 	}
 }
 

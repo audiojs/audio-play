@@ -8,9 +8,9 @@ let buf = AudioBuffer(1, lena);
 
 let playback = play(buf, {
 	start: 1.2,
-	end: 3,
+	end: 1.45,
 	volume: .5,
-	// loop: true,
+	loop: true,
 	rate: 1.1
 }, () => {
 	console.log('end');
@@ -19,5 +19,10 @@ let playback = play(buf, {
 setTimeout(() => {
 	let play = playback.pause();
 
-	setTimeout(playback.play, 400);
-}, 400);
+	setTimeout(() => {
+		playback.play();
+	}, 500);
+	setTimeout(() => {
+		playback.pause();
+	}, 1000);
+}, 500);
