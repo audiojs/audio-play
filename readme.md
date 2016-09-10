@@ -53,3 +53,7 @@ let playback = play(buffer, opts?, cb?);
 playback.pause();
 playback.play();
 ```
+
+### Related
+
+* [sample-player](https://github.com/danigb/sample-player), [audio-player](https://github.com/danigb/audio-player) — audio buffer players for browser from @danigb.
