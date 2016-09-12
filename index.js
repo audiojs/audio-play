@@ -41,7 +41,11 @@ module.exports = function (buffer, how, cb) {
 
 	let read = AudioSource(buffer, {
 		loop: how.loop
-	}, cb);
+	}, () => {
+		//node-speaker fix: we send 2s of silence
+		write(AudioBuffer(buffer.sampleRate * 2));
+		cb(true);
+	});
 	let write = AudioSpeaker({
 		channels: buffer.numberOfChannels,
 		sampleRate: buffer.sampleRate
@@ -61,7 +65,9 @@ module.exports = function (buffer, how, cb) {
 		isPlaying = true;
 
 		(function loop (err, buf) {
-			if (err) return cb && cb(err);
+			if (err) {
+				return cb(err);
+			}
 			if (!isPlaying) return;
 
 			buf = read(buf);
