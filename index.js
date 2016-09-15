@@ -6,6 +6,7 @@ const AudioSource = require('audio-source/direct');
 const AudioSpeaker = require('audio-speaker/direct');
 const isAudioBuffer = require('is-audio-buffer');
 const AudioBuffer = require('audio-buffer');
+const idx = require('negative-index');
 
 module.exports = function (buffer, how, cb) {
 	if (!isAudioBuffer(buffer)) throw Error('Argument should be an audio buffer');
@@ -20,8 +21,8 @@ module.exports = function (buffer, how, cb) {
 	if (how.offset == null) how.offset = 0;
 	if (how.start == null) how.start = 0;
 	if (how.end == null) how.end = buffer.duration;
-	how.start = normTime(how.start, buffer.duration);
-	how.end = normTime(how.end, buffer.duration);
+	how.start = idx(how.start, buffer.duration);
+	how.end = idx(how.end, buffer.duration);
 
 
 	//prepare buffer - slice to duration
@@ -83,8 +84,4 @@ module.exports = function (buffer, how, cb) {
 
 		return play;
 	}
-}
-
-function normTime (time, duration) {
-	return time < 0 ? (duration + (time % duration)) : Math.min(duration, time);
 }

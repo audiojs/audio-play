@@ -34,6 +34,7 @@
     "audio-buffer": "^2.4.5",
     "audio-source": "^1.0.0",
     "audio-speaker": "^1.4.0",
-    "is-audio-buffer": "^1.0.1"
+    "is-audio-buffer": "^1.0.1",
+    "negative-index": "^1.0.0"
   }
 }
