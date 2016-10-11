@@ -11,7 +11,7 @@ const play = require('audio-play');
 const load = require('audio-loader');
 const context = require('audio-context');
 
-load(context, './sample.mp3').then(play);
+load('./sample.mp3').then(play);
 ```
 
 ## API
@@ -56,4 +56,4 @@ playback.play();
 
 ### Related
 
-* [sample-player](https://github.com/danigb/sample-player), [audio-player](https://github.com/danigb/audio-player) — audio buffer players for browser from @danigb.
+* [audio-loader](https://github.com/danigb/audio-loader) — load AudioBuffer from any audio source.
