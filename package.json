@@ -12,7 +12,7 @@
   "browser": "./browser",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/audiojs/play.git"
+    "url": "git+https://github.com/audiojs/audio-play.git"
   },
   "keywords": [
     "play",
@@ -23,9 +23,9 @@
   "author": "ΔY <dfcreative@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/audiojs/play/issues"
+    "url": "https://github.com/audiojs/audio-play/issues"
   },
-  "homepage": "https://github.com/audiojs/play#readme",
+  "homepage": "https://github.com/audiojs/audio-play#readme",
   "devDependencies": {
     "audio-lena": "^1.1.0",
     "eslint": "^3.4.0"
