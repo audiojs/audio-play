@@ -3,6 +3,7 @@
 const play = require('./');
 const lena = require('audio-lena/buffer');
 const AudioBuffer = require('audio-buffer');
+const assert = require('assert')
 
 let buf = AudioBuffer(1, lena);
 
@@ -18,6 +19,8 @@ let playback = play(buf, {
 
 setTimeout(() => {
 	let play = playback.pause();
+
+	assert(playback.currentTime);
 
 	setTimeout(() => {
 		playback.play();

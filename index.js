@@ -18,7 +18,7 @@ module.exports = function (buffer, how, cb) {
 	how = how || {};
 	cb = cb || (() => {});
 
-	if (how.offset == null) how.offset = 0;
+	if (how.currentTime == null) how.currentTime = 0;
 	if (how.start == null) how.start = 0;
 	if (how.end == null) how.end = buffer.duration;
 	how.start = idx(how.start, buffer.duration);
@@ -39,6 +39,7 @@ module.exports = function (buffer, how, cb) {
 	}
 
 	//TODO: somewhere here goes rate mapping, volume and detune
+
 
 	let read = AudioSource(buffer, {
 		loop: how.loop
@@ -72,6 +73,11 @@ module.exports = function (buffer, how, cb) {
 			if (!isPlaying) return;
 
 			buf = read(buf);
+
+			//track current time
+			how.currentTime += buf.duration
+			play.currentTime = pause.currentTime = how.currentTime
+
 			write(buf, loop);
 		}());
 

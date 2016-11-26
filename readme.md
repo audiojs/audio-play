@@ -52,6 +52,9 @@ pause = play();
 let playback = play(buffer, opts?, cb?);
 playback.pause();
 playback.play();
+
+//get played time
+playback.currentTIme;
 ```
 
 ### Related

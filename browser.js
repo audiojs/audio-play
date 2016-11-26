@@ -17,7 +17,7 @@ module.exports = function Play (buffer, how, cb) {
 
 	if (how.context == null) how.context = context;
 
-	if (how.offset == null) how.offset = 0;
+	if (how.currentTime == null) how.currentTime = 0;
 	if (how.start == null) how.start = 0;
 	if (how.end == null) how.end = buffer.duration;
 	how.start = normTime(how.start, buffer.duration);
@@ -51,10 +51,10 @@ module.exports = function Play (buffer, how, cb) {
 		startTime = how.context.currentTime;
 
 		if (how.loop) {
-			sourceNode.start(startTime, how.start + how.offset);
+			sourceNode.start(startTime, how.start + how.currentTime);
 		}
 		else {
-			sourceNode.start(startTime, how.start + how.offset, how.end - how.start);
+			sourceNode.start(startTime, how.start + how.currentTime, how.end - how.start);
 		}
 
 		return pause;
@@ -70,11 +70,12 @@ module.exports = function Play (buffer, how, cb) {
 		let playedTime = (how.context.currentTime - startTime);
 
 		how.autoplay = false;
-		how.offset = playedTime;
+		how.currentTime = playedTime;
 
 		let playback = Play(buffer, how, cb);
 		play.play = pause.play = playback.play;
 		play.pause = pause.pause = playback.pause;
+		play.currentTime = pause.currentTime = playback.currentTime = how.currentTime;
 
 		return playback;
 	}
