@@ -31,7 +31,7 @@
     "eslint": "^3.4.0"
   },
   "dependencies": {
-    "audio-buffer": "^2.4.5",
+    "audio-buffer": "^3.1.1",
     "audio-source": "^1.0.0",
     "audio-speaker": "^1.4.0",
     "is-audio-buffer": "^1.0.1",
