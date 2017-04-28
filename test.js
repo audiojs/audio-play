@@ -9,7 +9,7 @@ let buf = AudioBuffer(1, lena);
 
 let playback = play(buf, {
 	start: 1.2,
-	end: 1.45,
+	end: 1.28,
 	volume: .5,
 	loop: true,
 	rate: 1.1

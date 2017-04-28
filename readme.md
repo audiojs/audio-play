@@ -1,6 +1,4 @@
-# audio-play [![Build Status](https://travis-ci.org/audiojs/audio-play.svg?branch=master)](https://travis-ci.org/audiojs/audio-play) [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/audiojs/audio-play.svg)](https://greenkeeper.io/)
+# audio-play [![Build Status](https://travis-ci.org/audiojs/audio-play.svg?branch=master)](https://travis-ci.org/audiojs/audio-play) [![unstable](https://img.shields.io/badge/stability-unstable-orange.svg?style=flat-square)](http://github.com/badges/stability-badges) [![Greenkeeper badge](https://badges.greenkeeper.io/audiojs/audio-play.svg)](https://greenkeeper.io/)
 
 Play [audio buffer](https://github.com/audiojs/audio-buffer), browser/node-wise.
 
