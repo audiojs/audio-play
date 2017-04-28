@@ -7,6 +7,7 @@ const AudioSpeaker = require('audio-speaker/direct');
 const isAudioBuffer = require('is-audio-buffer');
 const AudioBuffer = require('audio-buffer');
 const idx = require('negative-index');
+function loud (err) { throw err }
 
 module.exports = function (buffer, how, cb) {
 	if (!isAudioBuffer(buffer)) throw Error('Argument should be an audio buffer');
@@ -16,7 +17,7 @@ module.exports = function (buffer, how, cb) {
 	}
 
 	how = how || {};
-	cb = cb || (() => {});
+	cb = cb || loud;
 
 	if (how.currentTime == null) how.currentTime = 0;
 	if (how.start == null) how.start = 0;
@@ -46,7 +47,7 @@ module.exports = function (buffer, how, cb) {
 	}, () => {
 		//node-speaker fix: we send 2s of silence
 		write(AudioBuffer(buffer.sampleRate * 2));
-		cb(true);
+		// cb(true)
 	});
 	let write = AudioSpeaker({
 		channels: buffer.numberOfChannels,
@@ -56,21 +57,21 @@ module.exports = function (buffer, how, cb) {
 	//provide API
 	play.play = pause.play = play;
 	play.pause = pause.pause = pause;
+	play.end = pause.end = end_player
 
 	let isPlaying = false;
+	let ended = false
 
 	return how.autoplay != false ? play() : play;
 
 	function play () {
-		if (isPlaying) return;
+		if (isPlaying || ended) return;
 
 		isPlaying = true;
 
 		(function loop (err, buf) {
-			if (err) {
-				return cb(err);
-			}
-			if (!isPlaying) return;
+			if (!isPlaying || ended) return;
+			if (err) return end_player(err);
 
 			buf = read(buf);
 
@@ -90,9 +91,17 @@ module.exports = function (buffer, how, cb) {
 	}
 
 	function pause () {
-		if (!isPlaying) return;
+		if (!isPlaying || ended) return;
 		isPlaying = false;
 
 		return play;
+	}
+
+	function end_player (err) {
+		isPlaying = false
+		ended = true
+		read.end()
+		write.end()
+		cb(err)
 	}
 }

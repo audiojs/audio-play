@@ -13,8 +13,8 @@ let playback = play(buf, {
 	volume: .5,
 	loop: true,
 	rate: 1.1
-}, () => {
-	console.log('end');
+}, err => {
+	console.log(err);
 });
 
 setTimeout(() => {
@@ -28,4 +28,10 @@ setTimeout(() => {
 	setTimeout(() => {
 		playback.pause();
 	}, 1000);
+	setTimeout(() => {
+		playback.play();
+	}, 1500)
+	setTimeout(() => {
+		playback.end('testing end')
+	}, 2000)
 }, 500);

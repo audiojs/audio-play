@@ -4,6 +4,7 @@
 
 const context = require('audio-context');
 const isAudioBuffer = require('is-audio-buffer');
+function loud (err) { throw err }
 
 module.exports = function Play (buffer, how, cb) {
 	if (!isAudioBuffer(buffer)) throw Error('Argument should be an audio buffer');
@@ -13,7 +14,7 @@ module.exports = function Play (buffer, how, cb) {
 	}
 
 	how = how || {};
-	cb = cb || (() => {});
+	cb = cb || loud;
 
 	if (how.context == null) how.context = context;
 
@@ -32,19 +33,27 @@ module.exports = function Play (buffer, how, cb) {
 	}
 	sourceNode.connect(how.gain);
 
-	sourceNode.addEventListener('ended', cb);
+	function end_event (e) {
+
+		end_player()
+	}
+
+	sourceNode.addEventListener('ended', end_event);
 
 	//provide API
 	play.play = pause.play = play;
 	play.pause = pause.pause = pause;
+	play.end = pause.end = end_player
+	play._sourceNode = sourceNode
 
 	let startTime = 0;
 	let isPlaying = false;
+	let ended = false
 
-	return how.autoplay != false ? play() : play;
+	return how.autoplay !== false ? play() : play;
 
 	function play () {
-		if (isPlaying) return pause;
+		if (isPlaying || ended) return pause;
 
 		isPlaying = true;
 
@@ -61,11 +70,11 @@ module.exports = function Play (buffer, how, cb) {
 	}
 
 	function pause () {
-		if (!isPlaying) return pause.play;
+		if (!isPlaying || ended) return pause.play;
 		isPlaying = false;
 
 		sourceNode.stop();
-		sourceNode.removeEventListener('ended', cb);
+		sourceNode.removeEventListener('ended', end_event);
 
 		let playedTime = (how.context.currentTime - startTime);
 
@@ -76,8 +85,16 @@ module.exports = function Play (buffer, how, cb) {
 		play.play = pause.play = playback.play;
 		play.pause = pause.pause = playback.pause;
 		play.currentTime = pause.currentTime = playback.currentTime = how.currentTime;
+		// sourceNode = playback._sourceNode
+		// sourceNode.stop()
 
 		return playback;
+	}
+
+	function end_player (err) {
+		pause()
+		ended = true
+		cb(err)
 	}
 }
 
