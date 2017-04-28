@@ -74,6 +74,11 @@ module.exports = function (buffer, how, cb) {
 
 			buf = read(buf);
 
+			if (!buf) {
+				pause()
+				return
+			}
+
 			//track current time
 			how.currentTime += buf.duration
 			play.currentTime = pause.currentTime = how.currentTime
