@@ -2,7 +2,7 @@
 
 'use strict';
 
-const context = require('audio-context');
+const getContext = require('audio-context');
 const isAudioBuffer = require('is-audio-buffer');
 
 module.exports = function Play (buffer, how, cb) {
@@ -15,7 +15,7 @@ module.exports = function Play (buffer, how, cb) {
 	how = how || {};
 	cb = cb || (() => {});
 
-	if (how.context == null) how.context = context;
+	if (how.context == null) how.context = getContext();
 
 	if (how.currentTime == null) how.currentTime = 0;
 	if (how.start == null) how.start = 0;
@@ -28,7 +28,7 @@ module.exports = function Play (buffer, how, cb) {
 	if (!how.gain) {
 		how.gain = how.context.createGain();
 		how.gain.gain.value = how.volume == null ? 1 : how.volume;
-		how.gain.connect(context.destination);
+		how.gain.connect(how.context.destination);
 	}
 	sourceNode.connect(how.gain);
 

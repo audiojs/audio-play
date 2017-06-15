@@ -29,7 +29,11 @@ module.exports = function (buffer, how, cb) {
 	if (how.start != 0 || how.end != buffer.duration) {
 		let start = Math.floor(how.start * buffer.sampleRate);
 		let end = Math.floor(how.end * buffer.sampleRate);
-		let slicedBuffer = new AudioBuffer(buffer.numberOfChannels, end - start, buffer.sampleRate);
+		let slicedBuffer = new AudioBuffer(null, {
+			numberOfChannels: buffer.numberOfChannels,
+			length: end - start,
+			sampleRate: buffer.sampleRate
+		});
 		for (let channel = 0; channel < buffer.numberOfChannels; channel++) {
 			slicedBuffer.getChannelData(channel).set(
 				buffer.getChannelData(channel).subarray(start, end)
@@ -45,7 +49,11 @@ module.exports = function (buffer, how, cb) {
 		loop: how.loop
 	}, () => {
 		//node-speaker fix: we send 2s of silence
-		write(AudioBuffer(buffer.sampleRate * 2));
+		write(new AudioBuffer(null, {
+			length: buffer.sampleRate * 2,
+			numberOfChannels: buffer.numberOfChannels,
+			sampleRate: buffer.sampleRate
+		}));
 		cb(true);
 	});
 	let write = AudioSpeaker({

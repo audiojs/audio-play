@@ -4,21 +4,31 @@ const play = require('./');
 const lena = require('audio-lena/buffer');
 const AudioBuffer = require('audio-buffer');
 const assert = require('assert')
+const context = require('audio-context')()
 
-let buf = AudioBuffer(1, lena);
+let samples = new Float32Array(lena)
+let buf = new AudioBuffer(context, {numberOfChannels: 1, length: samples.length});
+buf.getChannelData(0).set(samples)
 
 let playback = play(buf, {
 	start: 1.2,
-	end: 1.28,
+	end: 1.29,
 	volume: .5,
 	loop: true,
-	rate: 1.1
+	rate: 2
 }, () => {
 	console.log('end');
 });
 
+
+//TODO
+// setInterval(() => {
+// 	playback.rate *= 1.5
+// }, 10)
+
 setTimeout(() => {
 	let play = playback.pause();
+
 
 	assert(playback.currentTime);
 
