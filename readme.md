@@ -9,7 +9,6 @@ Play [audio buffer](https://github.com/audiojs/audio-buffer), browser/node-wise.
 ```js
 const play = require('audio-play');
 const load = require('audio-loader');
-const context = require('audio-context');
 
 load('./sample.mp3').then(play);
 ```
@@ -21,27 +20,27 @@ const play = require('audio-play');
 
 //play audio buffer with possible options
 let pause = play(audioBuffer, {
-	//start/end time, can be negative to measure from the end
-	start: 0,
-	end: audioBuffer.duration,
+  //start/end time, can be negative to measure from the end
+  start: 0,
+  end: audioBuffer.duration,
 
-	//repeat playback within start/end
-	loop: false,
+  //repeat playback within start/end
+  loop: false,
 
-	//playback rate
-	rate: 1,
+  //playback rate
+  rate: 1,
 
-	//fine-tune of playback rate, in cents
-	detune: 0,
+  //fine-tune of playback rate, in cents
+  detune: 0,
 
-	//volume
-	volume: 1,
+  //volume
+  volume: 1,
 
-	//possibly existing audio-context, not necessary
-	context: require('audio-context'),
+  //possibly existing audio-context, not necessary
+  context: require('audio-context'),
 
-	//start playing immediately
-	autoplay: true
+  //start playing immediately
+  autoplay: true
 }, onend?);
 
 //pause/continue playback
@@ -54,9 +53,10 @@ playback.pause();
 playback.play();
 
 //get played time
-playback.currentTIme;
+playback.currentTime;
 ```
 
 ### Related
 
-* [audio-loader](https://github.com/danigb/audio-loader) — load AudioBuffer from any audio source.
+* [audio-loader](https://github.com/audiojs/audio-loader) — load AudioBuffer from any audio source.
+* [audio-decode](https://github.com/audiojs/audio-decode) — decode audioBuffer
