@@ -57,21 +57,21 @@ module.exports = function (buffer, how, cb) {
 	//provide API
 	play.play = pause.play = play;
 	play.pause = pause.pause = pause;
-	play.end = pause.end = end_player
+	play.stop = pause.stop = stop
 
 	let isPlaying = false;
-	let ended = false
+	let stopped = false
 
 	return how.autoplay != false ? play() : play;
 
 	function play () {
-		if (isPlaying || ended) return;
+		if (isPlaying || stopped) return;
 
 		isPlaying = true;
 
 		(function loop (err, buf) {
-			if (!isPlaying || ended) return;
-			if (err) return end_player(err);
+			if (!isPlaying || stopped) return;
+			if (err) return stop(err);
 
 			buf = read(buf);
 
@@ -91,15 +91,15 @@ module.exports = function (buffer, how, cb) {
 	}
 
 	function pause () {
-		if (!isPlaying || ended) return;
+		if (!isPlaying || stopped) return;
 		isPlaying = false;
 
 		return play;
 	}
 
-	function end_player (err) {
+	function stop (err) {
 		isPlaying = false
-		ended = true
+		stopped = true
 		read.end()
 		write.end()
 		cb(err)

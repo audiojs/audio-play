@@ -32,6 +32,6 @@ setTimeout(() => {
 		playback.play();
 	}, 1500)
 	setTimeout(() => {
-		playback.end('testing end')
+		playback.stop('testing end')
 	}, 2000)
 }, 500);
