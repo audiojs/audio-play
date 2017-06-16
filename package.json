@@ -1,6 +1,6 @@
 {
   "name": "audio-play",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Play audio buffer in node or browser",
   "main": "index.js",
   "scripts": {
@@ -15,8 +15,9 @@
     "url": "git+https://github.com/audiojs/audio-play.git"
   },
   "keywords": [
-    "play",
+    "player",
     "audio",
+    "audiojs",
     "web-audio-api",
     "sound"
   ],
@@ -27,10 +28,11 @@
   },
   "homepage": "https://github.com/audiojs/audio-play#readme",
   "devDependencies": {
-    "audio-lena": "^1.1.0"
+    "audio-lena": "^1.1.3"
   },
   "dependencies": {
-    "audio-buffer": "^3.1.1",
+    "audio-buffer": "^4.0.1",
+    "audio-context": "^1.0.1",
     "audio-source": "^1.0.0",
     "audio-speaker": "^1.4.0",
     "is-audio-buffer": "^1.0.1",
