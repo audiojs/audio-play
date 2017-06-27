@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/audiojs/audio-play#readme",
   "devDependencies": {
-    "audio-lena": "^1.1.3"
+    "audio-lena": "^2.1.1"
   },
   "dependencies": {
     "audio-buffer": "^4.0.1",
