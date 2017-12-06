@@ -54,7 +54,6 @@ module.exports = function (buffer, how, cb) {
 			numberOfChannels: buffer.numberOfChannels,
 			sampleRate: buffer.sampleRate
 		}));
-		cb(true);
 	});
 	let write = AudioSpeaker({
 		channels: buffer.numberOfChannels,
@@ -100,6 +99,7 @@ module.exports = function (buffer, how, cb) {
 	function pause () {
 		if (!isPlaying) return;
 		isPlaying = false;
+		cb()
 
 		return play;
 	}

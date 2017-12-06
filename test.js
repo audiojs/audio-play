@@ -47,7 +47,12 @@ t('lena', t => {
 })
 
 t('long sample file', t => {
+	let loaded = false
 	load('./soundtest.wav', (err, buf) => {
-		play(buf)
+		if (loaded) return
+		loaded = true
+		play(buf, e => {
+			t.end()
+		})
 	})
 })
