@@ -6,6 +6,7 @@ const AudioSource = require('audio-source/direct');
 const AudioSpeaker = require('audio-speaker/direct');
 const isAudioBuffer = require('is-audio-buffer');
 const AudioBuffer = require('audio-buffer');
+const AudioBufferUtils = require('audio-buffer-utils');
 const idx = require('negative-index');
 
 module.exports = function (buffer, how, cb) {
@@ -21,9 +22,9 @@ module.exports = function (buffer, how, cb) {
 	if (how.currentTime == null) how.currentTime = 0;
 	if (how.start == null) how.start = 0;
 	if (how.end == null) how.end = buffer.duration;
+	if (how.volume == null) how.volume = 1;
 	how.start = idx(how.start, buffer.duration);
 	how.end = idx(how.end, buffer.duration);
-
 
 	//prepare buffer - slice to duration
 	if (how.start != 0 || how.end != buffer.duration) {
@@ -42,8 +43,7 @@ module.exports = function (buffer, how, cb) {
 		buffer = slicedBuffer;
 	}
 
-	//TODO: somewhere here goes rate mapping, volume and detune
-
+	//TODO: somewhere here goes rate mapping and detune
 
 	let read = AudioSource(buffer, {
 		loop: how.loop
@@ -80,6 +80,9 @@ module.exports = function (buffer, how, cb) {
 			if (!isPlaying) return;
 
 			buf = read(buf);
+			
+			// apply volume
+			buf = AudioBufferUtils.fill(buf, v => v * how.volume)
 
 			if (!buf) {
 				pause()
