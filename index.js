@@ -42,6 +42,9 @@ module.exports = function (buffer, how, cb) {
 		}
 		buffer = slicedBuffer;
 	}
+	
+	// apply volume
+	buffer = AudioBufferUtils.fill(buffer, v => v * how.volume)
 
 	//TODO: somewhere here goes rate mapping and detune
 
@@ -81,9 +84,6 @@ module.exports = function (buffer, how, cb) {
 
 			buf = read(buf);
 			
-			// apply volume
-			buf = AudioBufferUtils.fill(buf, v => v * how.volume)
-
 			if (!buf) {
 				pause()
 				return
