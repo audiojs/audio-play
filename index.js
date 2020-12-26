@@ -57,7 +57,8 @@ module.exports = function (buffer, how, cb) {
 	});
 	let write = AudioSpeaker({
 		channels: buffer.numberOfChannels,
-		sampleRate: buffer.sampleRate
+		sampleRate: buffer.sampleRate,
+		device: how.device
 	});
 
 	//provide API
