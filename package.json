@@ -6,8 +6,7 @@
   "scripts": {
     "test": "node test.js",
     "test:browser": "budo test.js",
-    "lint": "eslint *.js --ignore-pattern test*",
-    "preversion": "npm run lint && npm run test"
+    "lint": "eslint *.js --ignore-pattern test*"
   },
   "browser": "./browser",
   "repository": {
