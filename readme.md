@@ -36,6 +36,9 @@ let pause = play(audioBuffer, {
   //volume
   volume: 1,
 
+  //device (for use with NodeJS, optional)
+  device: 'hw:1,0',
+
   //possibly existing audio-context, not necessary
   context: require('audio-context'),
 
