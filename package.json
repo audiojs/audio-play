@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "audio-buffer": "^4.0.1",
+    "audio-buffer-utils": "^5.1.2",
     "audio-context": "^1.0.1",
     "audio-source": "^1.0.0",
     "audio-speaker": "^1.4.0",
