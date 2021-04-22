@@ -1,6 +1,6 @@
 {
   "name": "audio-play",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Play audio buffer in node or browser",
   "main": "index.js",
   "scripts": {
