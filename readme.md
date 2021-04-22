@@ -2,6 +2,9 @@
 
 Play [audio buffer](https://github.com/audiojs/audio-buffer), browser/node-wise.
 
+## Updates
+The difference between the original package and this one is that you can supply a callback that will be called back with each audio frame
+
 ## Usage
 
 [![npm install audio-play](https://nodei.co/npm/audio-play.png?mini=true)](https://npmjs.org/package/audio-play/)
