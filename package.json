@@ -1,5 +1,5 @@
 {
-  "name": "audio-play",
+  "name": "audio-play-framecb",
   "version": "2.4.0",
   "description": "Play audio buffer in node or browser",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "browser": "./browser",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/audiojs/audio-play.git"
+    "url": "git+https://github.com/sirloso/audio-play.git"
   },
   "keywords": [
     "player",
@@ -23,9 +23,9 @@
   "author": "ΔY <dfcreative@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/audiojs/audio-play/issues"
+    "url": "https://github.com/sirloso/audio-play/issues"
   },
-  "homepage": "https://github.com/audiojs/audio-play#readme",
+  "homepage": "https://github.com/sirloso/audio-play#readme",
   "devDependencies": {
     "audio-lena": "^1.1.3",
     "audio-loader": "^1.0.3",

@@ -77,6 +77,8 @@ t('frameBuff works', t => {
 	load('./soundtest.wav', (err, buf) => {
 		if (loaded) return
 		loaded = true
-		play(buf,{},()=>{},frameCB)
+		play(buf,{},()=>{
+			t.end()
+		},frameCB)
 	})
 })
