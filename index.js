@@ -9,7 +9,7 @@ const AudioBuffer = require('audio-buffer');
 const AudioBufferUtils = require('audio-buffer-utils');
 const idx = require('negative-index');
 
-module.exports = function (buffer, how, cb) {
+module.exports = function (buffer, how, cb, frameCB) {
 	if (!isAudioBuffer(buffer)) throw Error('Argument should be an audio buffer');
 
 	if (how instanceof Function) {
@@ -18,6 +18,7 @@ module.exports = function (buffer, how, cb) {
 
 	how = how || {};
 	cb = cb || (() => {});
+	frameCB = frameCB || (()=>{})
 
 	if (how.currentTime == null) how.currentTime = 0;
 	if (how.start == null) how.start = 0;
@@ -93,6 +94,8 @@ module.exports = function (buffer, how, cb) {
 			//track current time
 			how.currentTime += buf.duration
 			play.currentTime = pause.currentTime = how.currentTime
+
+			frameCB(buf)
 
 			write(buf, loop);
 		}());

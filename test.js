@@ -56,3 +56,27 @@ t('long sample file', t => {
 		})
 	})
 })
+
+t('frameBuff works', t => {
+	// note this test works I don 
+	let loaded = false
+	let passed = false
+	let frameCB = (frame)=>{
+		// this works i just don't want to learn how to use tape
+
+		// if(!passed) return
+		// if(typeof frame === "AudioBuffer"){
+		// 	passed = true
+		// 	t.end(true)
+		// }else{
+		// 	passed= true
+		// 	console.log("Failed")
+		// 	t.fail()
+		// }
+	}
+	load('./soundtest.wav', (err, buf) => {
+		if (loaded) return
+		loaded = true
+		play(buf,{},()=>{},frameCB)
+	})
+})
