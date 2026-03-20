@@ -1,4 +1,6 @@
-# audio-play [![Build Status](https://travis-ci.org/audiojs/audio-play.svg?branch=master)](https://travis-ci.org/audiojs/audio-play) [![unstable](https://img.shields.io/badge/stability-unstable-green.svg)](http://github.com/badges/stability-badges) [![Greenkeeper badge](https://badges.greenkeeper.io/audiojs/audio-play.svg)](https://greenkeeper.io/)
+# audio-play
+
+> **Deprecated.** This package is archived and no longer maintained. Its functionality is being folded into the [`audio`](https://github.com/audiojs/audio) package. For direct use, the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) covers the browser case natively, and [`audio-speaker`](https://github.com/audiojs/audio-speaker) handles node output.
 
 Play [audio buffer](https://github.com/audiojs/audio-buffer), browser/node-wise.
 
@@ -11,6 +13,16 @@ const play = require('audio-play');
 const load = require('audio-loader');
 
 load('./sample.mp3').then(play);
+```
+
+### Browser replacement
+
+```js
+let context = new AudioContext();
+let source = context.createBufferSource();
+source.buffer = audioBuffer;
+source.connect(context.destination);
+source.start();
 ```
 
 ## API
@@ -61,5 +73,6 @@ playback.currentTime;
 
 ### Related
 
-* [audio-loader](https://github.com/audiojs/audio-loader) — load AudioBuffer from any audio source.
-* [audio-decode](https://github.com/audiojs/audio-decode) — decode audioBuffer
+* [audio](https://github.com/audiojs/audio) — high-level audio toolkit.
+* [audio-speaker](https://github.com/audiojs/audio-speaker) — output audio to speaker in node/browser.
+* [audio-decode](https://github.com/audiojs/audio-decode) — decode audio data.
